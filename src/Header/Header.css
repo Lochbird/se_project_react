@@ -25,9 +25,16 @@
 .header__button_add-clothes {
   border: none;
   background: none;
+
   padding: 0;
   margin: 0;
+
   cursor: pointer;
+  font-family: "Cabinet Grotesk";
+
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
 }
 
 .header__title {
