@@ -1,66 +1,16 @@
 import "./App.css";
 import Header from "../Header/Header";
-import WeatherCard from "../Weather/WeatherCard";
-import ItemCard from "../ItemCard/ItemCard";
-
-const defaultClothingItems = [
-  {
-    _id: 0,
-    name: "Cap",
-    weather: "hot",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
-  },
-  {
-    _id: 1,
-    name: "Hoodie",
-    weather: "warm",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png?etag=5f52451d0958ccb1016c78a45603a4e8",
-  },
-  {
-    _id: 2,
-    name: "Jacket",
-    weather: "cold",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png?etag=f4bb188deaa25ac84ce2338be2d404ad",
-  },
-  {
-    _id: 3,
-    name: "Sneakers",
-    weather: "cold",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f",
-  },
-  {
-    _id: 4,
-    name: "T-Shirt",
-    weather: "hot",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09",
-  },
-  {
-    _id: 5,
-    name: "Winter coat",
-    weather: "cold",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4",
-  },
-];
+import Main from "../Main/Main";
+import Footer from "../footer/Footer";
 
 function App() {
+  const weatherTemp = "85°F";
   return (
     <div className="page">
       <div className="page__section">
         <Header />
-        <main className="main">
-          <WeatherCard day={true} type="sunny" />
-          <section className="card__section">
-            <div className="card__header">
-              Today is [degrees here] / You should wear:
-            </div>
-            <div className="card__items">
-              {defaultClothingItems.map((item) => (
-                <ItemCard key={item._id} item={item} />
-              ))}
-            </div>
-          </section>
-        </main>
-        <footer className="footer">Developed by Xander Ambrosio</footer>
+        <Main weatherTemp={weatherTemp} />
+        <Footer />
         <div className="modalWithForm">modalWithForm Hidden</div>
         <div className="itemModal">itemModal Hidden</div>
       </div>
