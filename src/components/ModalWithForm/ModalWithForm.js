@@ -12,7 +12,7 @@ const ModalWithForm = ({
       <div className="modal__content">
         <button className="modal__button-close" type="button" onClick={onClose}>
           <img
-            src={require("../Images/close-button-new_garment.svg").default}
+            src={require("../../images/close-button-new_garment.svg").default}
             alt="close"
           />
         </button>

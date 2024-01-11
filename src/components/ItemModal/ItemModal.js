@@ -11,7 +11,7 @@ const ItemModal = ({ selectedCard, onClose }) => {
             onClick={onClose}
           >
             <img
-              src={require("../Images/close-button.svg").default}
+              src={require("../../images/close-button.svg").default}
               alt="close"
             />
           </button>
