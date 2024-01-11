@@ -1,11 +1,12 @@
 .weather {
   position: relative;
+  padding: 0 40px;
 }
 
 .weather__info {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 16px;
+  left: 60px;
 
   color: #fff;
 

@@ -1,11 +1,19 @@
+import "./ItemModal.css";
+
 const ItemModal = ({ selectedCard, onClose }) => {
-  console.log("item modal", selectedCard);
   return (
     <div>
       <div className={"modal"}>
         <div className="modal__content">
-          <button type="button" onClick={onClose}>
-            Close
+          <button
+            className="modal__button-close"
+            type="button"
+            onClick={onClose}
+          >
+            <img
+              src={require("../Images/close-button.svg").default}
+              alt="close"
+            />
           </button>
           <img src={selectedCard.link} />
           <div>{selectedCard.name}</div>

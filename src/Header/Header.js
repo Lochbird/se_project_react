@@ -11,7 +11,7 @@ const Header = ({ onCreateModal }) => {
             alt="logo"
           />
         </div>
-        <div className="header__date">Date</div>
+        <div className="header__date">June 15, New York</div>
       </div>
       <div className="header__section">
         <button
