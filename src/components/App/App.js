@@ -26,10 +26,14 @@ function App() {
   };
 
   useEffect(() => {
-    getForecastWeather().then((data) => {
-      const temperature = parseWeatherData(data);
-      setTemp(temperature);
-    });
+    getForecastWeather()
+      .then((data) => {
+        const temperature = parseWeatherData(data);
+        setTemp(temperature);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   return (
@@ -39,7 +43,11 @@ function App() {
         <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
         <Footer />
         {activeModal === "create" && (
-          <ModalWithForm onClose={handleCloseModal} title="New garment">
+          <ModalWithForm
+            onClose={handleCloseModal}
+            title="New garment"
+            buttonText="Add garment"
+          >
             <label>
               Name
               <input

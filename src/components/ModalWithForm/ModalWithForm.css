@@ -78,9 +78,12 @@
 
   border: none;
 
+  mix-blend-mode: multiply;
   background-color: transparent;
   background-repeat: no-repeat;
   background-size: contain;
+
+  padding: 0;
 
   cursor: pointer;
 }

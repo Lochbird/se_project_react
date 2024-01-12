@@ -1,4 +1,5 @@
 import "./ItemModal.css";
+import closeButton from "../../images/close-button.svg";
 
 const ItemModal = ({ selectedCard, onClose }) => {
   return (
@@ -10,10 +11,7 @@ const ItemModal = ({ selectedCard, onClose }) => {
             type="button"
             onClick={onClose}
           >
-            <img
-              src={require("../../images/close-button.svg").default}
-              alt="close"
-            />
+            <img src={closeButton} alt="close" />
           </button>
           <img src={selectedCard.link} />
           <div>{selectedCard.name}</div>
