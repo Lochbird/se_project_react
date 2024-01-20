@@ -11,6 +11,7 @@
   width: 50px;
   height: 30px;
   appearance: none;
+  cursor: pointer;
 }
 
 .switch__slider {
@@ -49,10 +50,14 @@
   color: #fff;
   top: 2px;
   left: 27px;
+
+  cursor: pointer;
 }
 
 .switch__temp-C {
   color: #fff;
   top: 2px;
   left: 42px;
+
+  cursor: pointer;
 }
