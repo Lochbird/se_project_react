@@ -1,0 +1,21 @@
+.profile {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile__header {
+  display: flex;
+  column-gap: 20px;
+}
+
+.profile__avatar {
+  width: 56px;
+  height: 56px;
+  margin-left: 40px;
+}
+
+.profile__title {
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  font-weight: 700;
+}

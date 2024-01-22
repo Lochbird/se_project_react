@@ -15,6 +15,12 @@
   min-height: 60px;
 }
 
+.header__title {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .header__button_add-clothes {
   border: none;
   background: none;

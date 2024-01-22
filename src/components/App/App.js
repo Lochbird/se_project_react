@@ -2,7 +2,7 @@ import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import Profile from "../../Profile/Profile";
 import ItemModal from "../ItemModal/ItemModal";
 import { useEffect, useState } from "react";
 import { getForecastWeather, parseWeatherData } from "../../utils/weatherApi";
@@ -58,10 +58,12 @@ function App() {
         <div className="page__section">
           <Header onCreateModal={handleCreateModal} />
           <Switch>
-            <Route exact path="/">
+            <Route path="/profile">
+              <Profile />
+            </Route>
+            <Route path="/">
               <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
             </Route>
-            <Route path="/profile">profile</Route>
           </Switch>
           <Footer />
           {activeModal === "create" && (
