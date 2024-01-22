@@ -1,7 +1,15 @@
 import "./ModalWithForm.css";
 import closeButton from "../../images/close-button.svg";
 
-const ModalWithForm = ({ title, children, buttonText, onClose, name }) => {
+const ModalWithForm = ({
+  title,
+  children,
+  buttonText,
+  isOpen,
+  onSubmit,
+  onClose,
+  name,
+}) => {
   return (
     <div className={`modal modal__type_${name}`}>
       <div className="modal__content">
@@ -9,7 +17,7 @@ const ModalWithForm = ({ title, children, buttonText, onClose, name }) => {
           <img src={closeButton} alt="close" />
         </button>
         <h3 className="modal__header">{title}</h3>
-        <form className="modal__form">
+        <form onSubmit={onSubmit} className="modal__form">
           {children}
           <button type="submit" className="modal__button">
             {buttonText}
