@@ -9,7 +9,7 @@
 .switch__box {
   border-radius: 25px;
   border: 2px solid rgba(0, 0, 0, 0.6);
-  width: 52px;
+  width: 56px;
   height: 30px;
   appearance: none;
   cursor: pointer;
@@ -50,18 +50,20 @@
 
 .switch__temp-F {
   position: absolute;
+  font-size: 16px;
 
-  top: -13px;
-  left: 13px;
+  top: -10px;
+  left: 14px;
 
   cursor: pointer;
 }
 
 .switch__temp-C {
   position: absolute;
+  font-size: 16px;
 
-  top: -13px;
-  left: 34px;
+  top: -10px;
+  left: 39px;
 
   cursor: pointer;
 }
@@ -69,5 +71,9 @@
 .switch:hover {
   .switch__box {
     border: 2px solid #000;
+  }
+
+  .switch__inactive {
+    color: #000;
   }
 }
