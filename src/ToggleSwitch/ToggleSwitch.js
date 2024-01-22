@@ -25,14 +25,16 @@ const ToggleSwitch = ({}) => {
       ></span>
       <p
         className={`switch__temp-F ${
-          currentTemperatureUnit === "F" && "switch__active"
+          (currentTemperatureUnit === "F" && "switch__active") ||
+          "switch__inactive"
         }`}
       >
         F
       </p>
       <p
         className={`switch__temp-C ${
-          currentTemperatureUnit === "C" && "switch__active"
+          (currentTemperatureUnit === "C" && "switch__active") ||
+          "switch__inactive"
         }`}
       >
         C
