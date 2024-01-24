@@ -9,10 +9,12 @@ import { getForecastWeather, parseWeatherData } from "../../utils/weatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { Switch, Route } from "react-router-dom/cjs/react-router-dom.min";
 import AddItemModal from "../../AddItemModal/AddItemModal";
+import { getItems, addItem, deleteItem } from "../../Api/Api";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
+  const [clothingItems, setClothingItems] = useState([]);
   const [temp, setTemp] = useState(0);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
@@ -30,21 +32,34 @@ function App() {
   };
 
   const onAddItem = (values) => {
-    console.log(values);
+    addItem(values)
+      .then((res) => {
+        setClothingItems([...clothingItems, res]);
+        handleCloseModal();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const handleDeleteItem = (id) => {
+    deleteItem(id);
   };
 
   useEffect(() => {
-    getForecastWeather()
-      .then((data) => {
-        const temperature = parseWeatherData(data);
-        setTemp(temperature);
+    getForecastWeather().then((data) => {
+      const temperature = parseWeatherData(data);
+      setTemp(temperature);
+    });
+    getItems()
+      .then((res) => {
+        setClothingItems(res);
+        console.log(res);
       })
       .catch((err) => {
         console.error(err);
       });
   }, []);
-
-  console.log(currentTemperatureUnit);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -62,7 +77,11 @@ function App() {
               <Profile />
             </Route>
             <Route path="/">
-              <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
+              <Main
+                weatherTemp={temp}
+                onSelectCard={handleSelectedCard}
+                clothingItems={clothingItems}
+              />
             </Route>
           </Switch>
           <Footer />
