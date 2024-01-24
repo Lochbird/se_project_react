@@ -1,11 +1,10 @@
 import React, { useMemo, useContext } from "react";
 import "./Profile.css";
 import avatar from "../images/avatar.svg";
-import { defaultClothingItems } from "../utils/constants";
 import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUnitContext";
 import ItemCard from "../components/ItemCard/ItemCard";
 
-function Profile({ weatherTemp, onSelectCard }) {
+function Profile({ weatherTemp, onSelectCard, clothingItems }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 0;
   const weatherType = useMemo(() => {
@@ -18,7 +17,7 @@ function Profile({ weatherTemp, onSelectCard }) {
     }
   }, [weatherTemp]);
 
-  const filteredCards = defaultClothingItems.filter((item) => {
+  const filteredCards = clothingItems.filter((item) => {
     return item.weather.toLowerCase() === weatherType;
   });
 
