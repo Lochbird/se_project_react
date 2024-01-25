@@ -32,10 +32,12 @@ function App() {
   };
 
   const onAddItem = (values) => {
+    console.log(values);
     addItem(values)
       .then((res) => {
-        setClothingItems([...clothingItems, res]);
+        setClothingItems([res, ...clothingItems]);
         handleCloseModal();
+        console.log(res);
       })
       .catch((err) => {
         console.error(err);
@@ -43,7 +45,16 @@ function App() {
   };
 
   const handleDeleteItem = (id) => {
-    deleteItem(id);
+    console.log(id);
+    deleteItem(id)
+      .then(() => {
+        setClothingItems(clothingItems.filter((item) => item._id !== id));
+        console.log(clothingItems);
+        handleCloseModal();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   useEffect(() => {
@@ -89,11 +100,16 @@ function App() {
             <AddItemModal
               handleCloseModal={handleCloseModal}
               onAddItem={onAddItem}
+              handleAddItemsSubmit={onAddItem}
               isOpen={activeModal === "create"}
             />
           )}
           {activeModal === "preview" && (
-            <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
+            <ItemModal
+              selectedCard={selectedCard}
+              onClose={handleCloseModal}
+              handleDeleteItem={() => handleDeleteItem(selectedCard._id)}
+            />
           )}
         </div>
       </CurrentTemperatureUnitContext.Provider>

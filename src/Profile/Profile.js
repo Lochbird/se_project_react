@@ -18,7 +18,7 @@ function Profile({ weatherTemp, onSelectCard, clothingItems }) {
   }, [weatherTemp]);
 
   const filteredCards = clothingItems.filter((item) => {
-    return item.weather.toLowerCase() === weatherType;
+    return item.weather === weatherType;
   });
 
   return (
@@ -42,7 +42,11 @@ function Profile({ weatherTemp, onSelectCard, clothingItems }) {
         </div>
         <div className="card__items">
           {filteredCards.map((item) => (
-            <ItemCard key={item._id} item={item} onSelectCard={onSelectCard} />
+            <ItemCard
+              key={item.id || item._id}
+              item={item}
+              onSelectCard={onSelectCard}
+            />
           ))}
         </div>
       </section>

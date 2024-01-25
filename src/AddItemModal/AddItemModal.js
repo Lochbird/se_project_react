@@ -3,12 +3,13 @@ import ModalWithForm from "../components/ModalWithForm/ModalWithForm";
 
 const AddItemModal = ({ handleCloseModal, handleAddItemsSubmit, isOpen }) => {
   const [name, setName] = useState("");
+  const [weather, setWeather] = useState("");
   const handleNameChange = (e) => {
     console.log(e.target.value);
     setName(e.target.value);
   };
 
-  const [URL, setURL] = useState("");
+  const [imageUrl, setURL] = useState("");
   const handleURLChange = (e) => {
     console.log(e.target.value);
     setURL(e.target.value);
@@ -16,7 +17,7 @@ const AddItemModal = ({ handleCloseModal, handleAddItemsSubmit, isOpen }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAddItemsSubmit({ name, URL });
+    handleAddItemsSubmit({ name, imageUrl, weather });
   };
 
   return (
@@ -47,7 +48,7 @@ const AddItemModal = ({ handleCloseModal, handleAddItemsSubmit, isOpen }) => {
           type="url"
           name="link"
           minLength="2"
-          value={URL}
+          value={imageUrl}
           onChange={handleURLChange}
           required
         />
@@ -61,6 +62,7 @@ const AddItemModal = ({ handleCloseModal, handleAddItemsSubmit, isOpen }) => {
             name="weather"
             value="hot"
             id="hot"
+            onClick={() => setWeather("hot")}
           />
           <label>Hot</label>
         </div>
@@ -71,6 +73,7 @@ const AddItemModal = ({ handleCloseModal, handleAddItemsSubmit, isOpen }) => {
             name="weather"
             value="warm"
             id="warm"
+            onClick={() => setWeather("warm")}
           />
           <label>Warm</label>
         </div>
@@ -81,6 +84,7 @@ const AddItemModal = ({ handleCloseModal, handleAddItemsSubmit, isOpen }) => {
             name="weather"
             value="cold"
             id="cold"
+            onClick={() => setWeather("cold")}
           />
           <label>Cold</label>
         </div>

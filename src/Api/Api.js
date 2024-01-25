@@ -26,8 +26,10 @@ export const addItem = ({ name, imageUrl, weather }) => {
 };
 
 export const deleteItem = (id) => {
-  // create handler for delete button
-  return fetch(`${baseUrl}/items/:${id}`, {
+  return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
   }).then(checkResponse);
 };
