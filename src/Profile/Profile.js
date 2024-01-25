@@ -31,7 +31,7 @@ function Profile({ weatherTemp, onSelectCard, clothingItems }) {
           <p className="profile__title">Terrence Tegegne</p>
         </div>
       </div>
-      <section className="card__section">
+      <section className="profile__cards card__section">
         <div className="card__header-profile">
           <div>
             <p>Your Items</p>
