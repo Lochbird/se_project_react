@@ -2,7 +2,7 @@ import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-import Profile from "../../Profile/Profile";
+import Profile from "../Profile/Profile";
 import ItemModal from "../ItemModal/ItemModal";
 import { useEffect, useState } from "react";
 import { getForecastWeather, parseWeatherData } from "../../utils/weatherApi";
@@ -32,12 +32,10 @@ function App() {
   };
 
   const onAddItem = (values) => {
-    console.log(values);
     addItem(values)
       .then((res) => {
         setClothingItems([res, ...clothingItems]);
         handleCloseModal();
-        console.log(res);
       })
       .catch((err) => {
         console.error(err);
@@ -45,11 +43,9 @@ function App() {
   };
 
   const handleDeleteItem = (id) => {
-    console.log(id);
     deleteItem(id)
       .then(() => {
         setClothingItems(clothingItems.filter((item) => item._id !== id));
-        console.log(clothingItems);
         handleCloseModal();
       })
       .catch((err) => {
@@ -58,14 +54,17 @@ function App() {
   };
 
   useEffect(() => {
-    getForecastWeather().then((data) => {
-      const temperature = parseWeatherData(data);
-      setTemp(temperature);
-    });
+    getForecastWeather()
+      .then((data) => {
+        const temperature = parseWeatherData(data);
+        setTemp(temperature);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
     getItems()
       .then((res) => {
         setClothingItems(res);
-        console.log(res);
       })
       .catch((err) => {
         console.error(err);
@@ -86,6 +85,7 @@ function App() {
           <Switch>
             <Route path="/profile">
               <Profile
+                onCreateModal={handleCreateModal}
                 clothingItems={clothingItems}
                 onSelectCard={handleSelectedCard}
               />

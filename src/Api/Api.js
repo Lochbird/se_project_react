@@ -1,11 +1,5 @@
-const baseUrl = "http://localhost:3001";
-
-const checkResponse = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Error: ${res.status}`);
-};
+import { baseUrl } from "../utils/utils";
+import { checkResponse } from "../utils/utils";
 
 export const getItems = () => {
   return fetch(`${baseUrl}/items`).then(checkResponse);

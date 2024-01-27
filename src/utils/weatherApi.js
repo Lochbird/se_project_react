@@ -1,13 +1,8 @@
+import { checkResponse } from "./utils";
+
 const latitude = 44.34;
 const longitude = 10.99;
 const APIkey = "079cde1922485f6357249370cacdeb60";
-
-const checkResponse = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Error: ${res.status}`);
-};
 
 const getForecastWeather = () => {
   const weatherApi = fetch(
