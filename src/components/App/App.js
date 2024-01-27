@@ -8,8 +8,8 @@ import { useEffect, useState } from "react";
 import { getForecastWeather, parseWeatherData } from "../../utils/weatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { Switch, Route } from "react-router-dom/cjs/react-router-dom.min";
-import AddItemModal from "../../AddItemModal/AddItemModal";
-import { getItems, addItem, deleteItem } from "../../Api/Api";
+import AddItemModal from "../AddItemModal/AddItemModal";
+import { getItems, addItem, deleteItem } from "../../utils/Api";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");

@@ -1,7 +1,7 @@
 import React, { useMemo, useContext } from "react";
 import "./Profile.css";
 import SideBar from "../SideBar/SideBar";
-import ClothesSection from "../../ClothesSection/ClothesSection";
+import ClothesSection from "../ClothesSection/ClothesSection";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
 const Profile = ({

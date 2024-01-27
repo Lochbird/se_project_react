@@ -1,4 +1,4 @@
-import ItemCard from "../components/ItemCard/ItemCard";
+import ItemCard from "../ItemCard/ItemCard";
 
 const ClothesSection = ({ onCreateModal, filteredCards, onSelectCard }) => {
   return (

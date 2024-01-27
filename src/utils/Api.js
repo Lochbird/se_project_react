@@ -1,5 +1,5 @@
-import { baseUrl } from "../utils/utils";
-import { checkResponse } from "../utils/utils";
+import { baseUrl } from "./utils";
+import { checkResponse } from "./utils";
 
 export const getItems = () => {
   return fetch(`${baseUrl}/items`).then(checkResponse);
