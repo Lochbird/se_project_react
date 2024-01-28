@@ -13,6 +13,6 @@ It'll take some time getting used to but I think I'll get it down soon enough.
 
 ## Images
 
-- [Main Page](main_page.png)
-- [Item Modal](itemModal.png)
-- [Profile Section](profile.png)
+- ![Main Page](main_page.png)
+- ![Item Modal](itemModal.png)
+- ![Profile Section](profile.png)
