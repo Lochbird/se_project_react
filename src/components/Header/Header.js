@@ -9,7 +9,7 @@ const currentDate = new Date().toLocaleString("default", {
   day: "numeric",
 });
 
-const Header = ({ onCreateModal }) => {
+const Header = ({ onCreateModal, onLoginModal, onRegisterModal }) => {
   return (
     <header className="header">
       <div className="header__section">
@@ -22,6 +22,12 @@ const Header = ({ onCreateModal }) => {
       </div>
       <div className="header__section">
         <ToggleSwitch />
+        <button type="button" onClick={onRegisterModal}>
+          Register Modal
+        </button>
+        <button type="button" onClick={onLoginModal}>
+          Log In Modal
+        </button>
         <button
           type="button"
           onClick={onCreateModal}
