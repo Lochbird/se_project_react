@@ -1,17 +1,20 @@
 .profile {
   display: flex;
   justify-content: space-between;
+  gap: 16px;
 }
 
 .profile__header {
   display: flex;
   column-gap: 20px;
+  flex-direction: column;
 }
 
 .profile__avatar {
   width: 56px;
   height: 56px;
   margin-left: 40px;
+  border-radius: 50%;
 }
 
 .profile__title {

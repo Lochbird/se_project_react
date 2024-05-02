@@ -1,4 +1,4 @@
-.card__header {
+.cards__header {
   font-family: "Cabinet Grotesk";
   font-size: 20px;
   font-weight: 700;
@@ -6,11 +6,11 @@
   margin: 40px 0;
 }
 
-.card__section {
+.card__sections {
   padding: 0 34px;
 }
 
-.card__name {
+.card__header {
   background-color: #fff;
   color: rgba(0, 0, 0, 0.6);
 
@@ -32,7 +32,7 @@
   justify-content: center;
 }
 
-.card__items {
+.cards__items {
   position: relative;
   display: flex;
 

@@ -1,15 +1,23 @@
 import logo from "../../images/logo.svg";
-import avatar from "../../images/avatar.svg";
 import "./Header.css";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const currentDate = new Date().toLocaleString("default", {
   month: "long",
   day: "numeric",
 });
 
-const Header = ({ onCreateModal, onLoginModal, onRegisterModal }) => {
+const Header = ({
+  onCreateModal,
+  onLoginModal,
+  onRegisterModal,
+  isLoggedIn,
+}) => {
+  const { name, avatar } = useContext(CurrentUserContext);
+
   return (
     <header className="header">
       <div className="header__section">
@@ -22,25 +30,45 @@ const Header = ({ onCreateModal, onLoginModal, onRegisterModal }) => {
       </div>
       <div className="header__section">
         <ToggleSwitch />
-        <button type="button" onClick={onRegisterModal}>
-          Register Modal
-        </button>
-        <button type="button" onClick={onLoginModal}>
-          Log In Modal
-        </button>
-        <button
-          type="button"
-          onClick={onCreateModal}
-          className="header__button_add-clothes"
-        >
-          + Add Clothes
-        </button>
-        <Link to="/profile" className="header__title">
-          Terrence Tegegne
-        </Link>
-        <div className="header__avatar">
-          <img src={avatar} alt="avatar" />
-        </div>
+        {!isLoggedIn && (
+          <div className="header__section">
+            <button
+              className="header__button"
+              type="button"
+              onClick={onRegisterModal}
+            >
+              Sign Up
+            </button>
+            <button
+              className="header__button"
+              type="button"
+              onClick={onLoginModal}
+            >
+              Log In
+            </button>
+          </div>
+        )}
+        {isLoggedIn && (
+          <div className="header__section">
+            <button
+              type="button"
+              onClick={onCreateModal}
+              className="header__button"
+            >
+              + Add Clothes
+            </button>
+            <Link to="/profile" className="header__title">
+              {name}
+            </Link>
+            <div className="header__avatar">
+              <img
+                src={avatar}
+                alt="avatar"
+                className="header__profile-picture"
+              />
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );

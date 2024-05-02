@@ -9,6 +9,7 @@ const Profile = ({
   weatherTemp,
   onSelectCard,
   clothingItems,
+  isLoggedIn,
 }) => {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 0;

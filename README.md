@@ -20,3 +20,7 @@ It'll take some time getting used to but I think I'll get it down soon enough.
 ## Backend
 
 - [Backend for WTWR](https://github.com/Lochbird/se_project_express)
+
+## Notes
+
+Conditional statements need to be in a div or have a parent element

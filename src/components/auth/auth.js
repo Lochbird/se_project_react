@@ -1,7 +1,7 @@
 import { baseUrl } from "../../utils/utils";
 import { checkResponse } from "../../utils/utils";
 
-export const signup = ({ email, password }) => {
+const signup = ({ name, avatar, email, password }) => {
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
@@ -16,7 +16,8 @@ export const signup = ({ email, password }) => {
   }).then(checkResponse);
 };
 
-export const signin = ({ email, password }) => {
+const login = ({ email, password }) => {
+  console.log("email", email, "password: ", password);
   return fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
@@ -28,3 +29,21 @@ export const signin = ({ email, password }) => {
     }),
   }).then(checkResponse);
 };
+
+const getCurrentUser = (jwt) => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${jwt}`,
+    },
+  }).then(checkResponse);
+};
+
+const auth = {
+  signup,
+  login,
+  getCurrentUser,
+};
+
+export default auth;

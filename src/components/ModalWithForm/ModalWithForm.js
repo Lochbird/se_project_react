@@ -10,7 +10,7 @@ const ModalWithForm = ({
   onClose,
   name,
   login,
-  register,
+  handleRegister,
 }) => {
   return (
     <div className={`modal modal__type_${name}`}>
@@ -29,7 +29,7 @@ const ModalWithForm = ({
               <button
                 type="button"
                 className="modal__button-signup"
-                onClick={register}
+                onClick={handleRegister}
               >
                 or Sign Up
               </button>

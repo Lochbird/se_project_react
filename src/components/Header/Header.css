@@ -21,7 +21,7 @@
   cursor: pointer;
 }
 
-.header__button_add-clothes {
+.header__button {
   border: none;
   background: none;
 
@@ -40,4 +40,10 @@
   display: flex;
   align-items: center;
   gap: 24px;
+}
+
+.header__profile-picture {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }

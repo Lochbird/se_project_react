@@ -1,6 +1,12 @@
 import ItemCard from "../ItemCard/ItemCard";
 
-const ClothesSection = ({ onCreateModal, filteredCards, onSelectCard }) => {
+const ClothesSection = ({
+  onCreateModal,
+  filteredCards,
+  onSelectCard,
+  isLoggedIn,
+  onCardLike,
+}) => {
   return (
     <section className="profile__cards card__section">
       <div className="card__header-profile">
@@ -19,6 +25,8 @@ const ClothesSection = ({ onCreateModal, filteredCards, onSelectCard }) => {
             key={item.id || item._id}
             item={item}
             onSelectCard={onSelectCard}
+            isLoggedIn={isLoggedIn}
+            onCardLike={onCardLike}
           />
         ))}
       </div>
