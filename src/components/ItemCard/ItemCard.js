@@ -1,26 +1,23 @@
 import "./ItemCard.css";
-import { useContext, useEffect, useState } from "react";
+import react, { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import like from "../../images/like.svg";
+import liked from "../../images/liked.svg";
 
-const ItemCard = ({ item, onSelectCard, handleCardLike }) => {
+const ItemCard = ({ item, onSelectCard, handleCardLike, isLoggedIn }) => {
   const currentUser = useContext(CurrentUserContext);
-  // const [isLiked, setIsLiked] = useState(false);
   const isLiked = item.likes.some((name) => name === currentUser?._id);
   const id = item._id || item.id;
 
   const itemLikeButtonClassName = `card__like ${
-    isLiked ? "card__like-active" : ""
+    !isLoggedIn ? "card__like-hidden" : ""
   }`;
 
-  // useEffect(() => {
-  //   item.likes > 0 ? setIsLiked(true) : setIsLiked(false);
-  // });
+  const itemLikeButtonSrc = isLiked ? liked : like;
 
   const handleLike = () => {
-    console.log(id, isLiked, "handleLike");
+    console.log("id: ", id, "isLiked: ", isLiked);
     handleCardLike(id, isLiked);
-    // isLiked ? setIsLiked(false) : setIsLiked(true);
   };
 
   return (
@@ -29,7 +26,7 @@ const ItemCard = ({ item, onSelectCard, handleCardLike }) => {
         <div className="card__header">
           {item.name}
           <div className={itemLikeButtonClassName} onClick={handleLike}>
-            <img src={like} />
+            <img src={itemLikeButtonSrc} />
           </div>
         </div>
         <img

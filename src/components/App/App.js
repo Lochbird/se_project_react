@@ -7,6 +7,7 @@ import auth from "../auth/auth";
 import ItemModal from "../ItemModal/ItemModal";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import { EditProfileModal } from "../EditProfileModal/EditProfileModal";
 import { useEffect, useState } from "react";
 import { getForecastWeather, parseWeatherData } from "../../utils/weatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
@@ -108,8 +109,7 @@ function App() {
     setCurrentUser({ name: "", avatar: "", email: "", _id: "" });
   };
 
-  const handleCurrentUser = () => {
-    const jwt = localStorage.getItem("jwt");
+  const handleCurrentUser = (jwt) => {
     auth
       .getCurrentUser(jwt)
       .then(({ name, avatar, email, _id }) => {
@@ -119,6 +119,7 @@ function App() {
       .catch((err) => {
         console.error(err);
       });
+    return;
   };
 
   // const handleRegister = () => {
@@ -136,23 +137,28 @@ function App() {
 
   const handleCardLike = (id, isLiked) => {
     const jwt = localStorage.getItem("jwt");
-    isLiked
+    !isLiked
       ? addLikeItem(id, jwt)
           .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((card) => (card.id === id ? updatedCard : card))
-            );
+            console.log({ updatedCard, clothingItems });
+            console.log(updatedCard, "isliked should be false");
+            setClothingItems((cards) => {
+              return cards.map((card) => (card.id === id ? updatedCard : card));
+            });
+            console.log(clothingItems);
           })
           .catch((err) => {
             console.error(err);
           })
       : removeLikeItem(id, jwt)
           .then((updatedCard) => {
-            console.log(updatedCard);
-            console.log(updatedCard, "Updated Card");
-            setClothingItems((cards) =>
-              cards.map((card) => (card.id === id ? updatedCard : card))
-            );
+            console.log({ updatedCard, clothingItems });
+
+            console.log(updatedCard, "isliked should be true");
+            setClothingItems((cards) => {
+              return cards.map((card) => (card.id === id ? updatedCard : card));
+            });
+            console.log(clothingItems);
           })
           .catch((err) => {
             console.error(err);
@@ -188,10 +194,10 @@ function App() {
       });
   }, []);
 
-  useEffect((userData) => {
+  useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      handleCurrentUser(userData);
+      handleCurrentUser(jwt);
     }
     return;
   }, []);
@@ -223,6 +229,7 @@ function App() {
                   onLogOut={handleLogOut}
                   handleCardLike={handleCardLike}
                   updateUserData={updateUserData}
+                  handleEditProfileModal={() => setActiveModal("edit")}
                 />
               </ProtectedRoute>
               <Route path="/">
@@ -232,6 +239,7 @@ function App() {
                   clothingItems={clothingItems}
                   handleCardLike={handleCardLike}
                   onDislikeItem={removeLikeItem}
+                  isLoggedIn={isLoggedIn}
                 />
               </Route>
             </Switch>
@@ -263,6 +271,12 @@ function App() {
                 handleRegister={handleRegisterSubmit}
                 login={handleLoginModal}
                 isOpen={activeModal === "register"}
+              />
+            )}
+            {activeModal === "edit" && (
+              <EditProfileModal
+                handleCloseModal={handleCloseModal}
+                handleSubmit={updateUserData}
               />
             )}
           </div>

@@ -21,7 +21,8 @@ export const addItem = ({ values }, jwt) => {
   }).then(checkResponse);
 };
 
-export const updateUserData = ({ name, avatar, email }, jwt) => {
+export const updateUserData = ({ name, avatar }, jwt) => {
+  console.log("name: ", name, "avatar: ", avatar, "jwt: ", jwt);
   return fetch(`${baseUrl}/users/me`, {
     method: "PATCH",
     headers: {
@@ -31,7 +32,7 @@ export const updateUserData = ({ name, avatar, email }, jwt) => {
     body: JSON.stringify({
       name,
       avatar,
-      email,
+      // email,
     }),
   }).then(checkResponse);
 };

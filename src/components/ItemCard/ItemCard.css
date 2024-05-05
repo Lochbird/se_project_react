@@ -85,3 +85,7 @@
   font-size: 20px;
   font-weight: 700;
 }
+
+.card__like-hidden {
+  display: none;
+}

@@ -11,6 +11,7 @@ const Profile = ({
   clothingItems,
   // isLoggedIn,
   onLogOut,
+  handleEditProfileModal,
 }) => {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 0;
@@ -30,7 +31,10 @@ const Profile = ({
 
   return (
     <div className="profile">
-      <SideBar onLogOut={onLogOut} />
+      <SideBar
+        onLogOut={onLogOut}
+        handleEditProfileModal={handleEditProfileModal}
+      />
       <ClothesSection
         onCreateModal={onCreateModal}
         filteredCards={filteredCards}
