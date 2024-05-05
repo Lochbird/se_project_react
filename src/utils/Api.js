@@ -6,7 +6,6 @@ export const getItems = () => {
 };
 
 export const addItem = ({ values }, jwt) => {
-  console.log(values);
   const { name, imageUrl, weather } = values;
   return fetch(`${baseUrl}/items`, {
     method: "POST",

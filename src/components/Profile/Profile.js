@@ -9,7 +9,8 @@ const Profile = ({
   weatherTemp,
   onSelectCard,
   clothingItems,
-  isLoggedIn,
+  // isLoggedIn,
+  onLogOut,
 }) => {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 0;
@@ -29,7 +30,7 @@ const Profile = ({
 
   return (
     <div className="profile">
-      <SideBar />
+      <SideBar onLogOut={onLogOut} />
       <ClothesSection
         onCreateModal={onCreateModal}
         filteredCards={filteredCards}

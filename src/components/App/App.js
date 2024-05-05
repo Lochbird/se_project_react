@@ -41,20 +41,11 @@ function App() {
     _id: "",
   });
 
-  //! use for db.json
-  // useEffect(() => {
-  //   fetch("http://localhost:3002/items")
-  //     .then((res) => {
-  //       if (!res.ok) {
-  //         return Promise.reject("Error!");
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       console.log(data);
-  //       setClothingItems(data);
-  //     });
-  // }, []);
+  // TODO:
+  // 2. add likes and dislikes
+  // 3. add editing profile logic
+  // 4. work on current user context
+  // 5. add registration and authorization logic
 
   const handleLoginModal = () => {
     setActiveModal("login");
@@ -149,7 +140,7 @@ function App() {
       ? addLikeItem(id, jwt)
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((card) => (card._id === id ? updatedCard : card))
+              cards.map((card) => (card.id === id ? updatedCard : card))
             );
           })
           .catch((err) => {
@@ -157,8 +148,10 @@ function App() {
           })
       : removeLikeItem(id, jwt)
           .then((updatedCard) => {
+            console.log(updatedCard);
+            console.log(updatedCard, "Updated Card");
             setClothingItems((cards) =>
-              cards.map((card) => (card._id === id ? updatedCard : card))
+              cards.map((card) => (card.id === id ? updatedCard : card))
             );
           })
           .catch((err) => {
@@ -226,7 +219,7 @@ function App() {
                   onCreateModal={handleCreateModal}
                   clothingItems={clothingItems}
                   onSelectCard={handleSelectedCard}
-                  isLoggedIn={isLoggedIn}
+                  // isLoggedIn={isLoggedIn}
                   onLogOut={handleLogOut}
                   handleCardLike={handleCardLike}
                   updateUserData={updateUserData}
