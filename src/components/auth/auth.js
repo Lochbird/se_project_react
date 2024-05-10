@@ -2,7 +2,7 @@ import { baseUrl } from "../../utils/utils";
 import { checkResponse } from "../../utils/utils";
 
 const signup = ({ name, avatar, email, password }) => {
-  const res = fetch(`${baseUrl}/signup`, {
+  return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,11 +13,11 @@ const signup = ({ name, avatar, email, password }) => {
       email,
       password,
     }),
-  }).then(() => checkResponse(res));
+  }).then(checkResponse);
 };
 
 const login = ({ email, password }) => {
-  const res = fetch(`${baseUrl}/signin`, {
+  return fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -26,17 +26,17 @@ const login = ({ email, password }) => {
       email,
       password,
     }),
-  }).then(() => checkResponse(res));
+  }).then(checkResponse);
 };
 
 const checkToken = (jwt) => {
-  const res = fetch(`${baseUrl}/users/me`, {
+  return fetch(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${jwt}`,
     },
-  }).then(() => checkResponse(res));
+  }).then(checkResponse);
 };
 
 export { signup, login, checkToken };

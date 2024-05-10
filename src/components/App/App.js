@@ -106,7 +106,9 @@ function App() {
     setCurrentUser({ name: "", avatar: "", email: "", _id: "" });
   };
 
-  const handleCurrentUser = (jwt) => {
+  const handleCurrentUser = (user) => {
+    console.log(user);
+    const jwt = localStorage.getItem("jwt");
     if (!jwt) {
       return;
     }
