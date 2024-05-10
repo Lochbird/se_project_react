@@ -3,9 +3,18 @@ import closeButton from "../../images/close-button.svg";
 import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-const ItemModal = ({ selectedCard, onClose, handleDeleteItem }) => {
+const ItemModal = ({
+  selectedCard,
+  onClose,
+  // handleDeleteItem
+}) => {
   const currentUser = useContext(CurrentUserContext);
   const isOwned = selectedCard.owner === currentUser._id;
+
+  const handleCardDelete = () => {
+    console.log("delete card");
+    // handleDeleteItem(selectedCard._id);
+  };
 
   return (
     <div>
@@ -28,7 +37,7 @@ const ItemModal = ({ selectedCard, onClose, handleDeleteItem }) => {
               <button
                 className="modal__description modal__button-delete"
                 type="button"
-                onClick={handleDeleteItem}
+                onClick={handleCardDelete}
               >
                 Delete Item
               </button>

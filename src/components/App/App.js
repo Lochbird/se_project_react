@@ -8,7 +8,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import { EditProfileModal } from "../EditProfileModal/EditProfileModal";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getForecastWeather, parseWeatherData } from "../../utils/weatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -41,12 +41,6 @@ function App() {
     email: "",
     _id: "",
   });
-
-  // TODO:
-  // 2. add likes and dislikes
-  // 3. add editing profile logic
-  // 4. work on current user context
-  // 5. add registration and authorization logic
 
   const handleLoginModal = () => {
     setActiveModal("login");
@@ -258,7 +252,7 @@ function App() {
               <ItemModal
                 selectedCard={selectedCard}
                 onClose={handleCloseModal}
-                handleDeleteItem={() => handleDeleteItem(selectedCard._id)}
+                handleDeleteItem={handleDeleteItem}
               />
             )}
             {activeModal === "login" && (
