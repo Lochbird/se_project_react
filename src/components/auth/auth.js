@@ -50,11 +50,4 @@ const checkToken = (jwt) => {
   }).then(checkResponse);
 };
 
-const auth = {
-  signup,
-  login,
-  getCurrentUser,
-  checkToken,
-};
-
-export default auth;
+export { signup, login, getCurrentUser, checkToken };

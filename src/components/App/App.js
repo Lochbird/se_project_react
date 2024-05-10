@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import Profile from "../Profile/Profile";
-import auth from "../auth/auth";
+import { signup, login, getCurrentUser, checkToken } from "../auth/auth";
 import ItemModal from "../ItemModal/ItemModal";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
@@ -23,6 +23,8 @@ import {
   updateUserData,
 } from "../../utils/Api";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
+
+const auth = { signup, login, getCurrentUser, checkToken };
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
