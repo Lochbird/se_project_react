@@ -1,8 +1,12 @@
 import "./WeatherCard.css";
 import { weatherOptions } from "../../utils/constants";
-import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
-const WeatherCard = ({ day, type, weatherTemp = "" }) => {
+const WeatherCard = ({
+  day,
+  type,
+  weatherTemp = "",
+  CurrentTemperatureUnit,
+}) => {
   const weather = weatherOptions.find(
     (weatherOption) => weatherOption.day === day && weatherOption.type === type
   );
@@ -11,7 +15,7 @@ const WeatherCard = ({ day, type, weatherTemp = "" }) => {
   return (
     <section className="weather" id="weather">
       <div className="weather__info">
-        {weatherTemp}°{CurrentTemperatureUnitContext}
+        {weatherTemp}°{CurrentTemperatureUnit}
       </div>
       <img src={imageSrc} alt={type} className="weather__image" />
     </section>

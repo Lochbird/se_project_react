@@ -104,6 +104,9 @@ function App() {
   };
 
   const handleCurrentUser = (jwt) => {
+    if (!jwt) {
+      return;
+    }
     auth
       .getCurrentUser(jwt)
       .then(({ name, avatar, email, _id }) => {
@@ -190,13 +193,18 @@ function App() {
 
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      auth.checkToken(jwt).then((user) => {
+    if (!jwt) {
+      return;
+    }
+    auth
+      .checkToken(jwt)
+      .then((user) => {
         setIsLoggedIn(true);
         handleCurrentUser(user);
+      })
+      .catch((err) => {
+        console.error(err);
       });
-    }
-    return;
   }, []);
 
   const handleToggleSwitchChange = () => {
