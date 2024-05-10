@@ -17,7 +17,6 @@ const signup = ({ name, avatar, email, password }) => {
 };
 
 const login = ({ email, password }) => {
-  console.log("email", email, "password: ", password);
   return fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
