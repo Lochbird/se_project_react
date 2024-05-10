@@ -64,3 +64,13 @@ export const removeLikeItem = (id, jwt) => {
     },
   }).then(checkResponse);
 };
+
+export const getCurrentUser = (jwt) => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${jwt}`,
+    },
+  }).then(checkResponse);
+};

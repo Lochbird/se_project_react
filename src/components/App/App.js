@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import Profile from "../Profile/Profile";
-import { signup, login, getCurrentUser, checkToken } from "../auth/auth";
+import { signup, login, checkToken } from "../auth/auth";
 import ItemModal from "../ItemModal/ItemModal";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
@@ -21,10 +21,11 @@ import {
   addLikeItem,
   removeLikeItem,
   updateUserData,
+  getCurrentUser,
 } from "../../utils/Api";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 
-const auth = { signup, login, getCurrentUser, checkToken };
+const auth = { signup, login, checkToken };
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -109,8 +110,7 @@ function App() {
     if (!jwt) {
       return;
     }
-    auth
-      .getCurrentUser(jwt)
+    getCurrentUser(jwt)
       .then(({ name, avatar, email, _id }) => {
         setIsLoggedIn(true);
         setCurrentUser({ name, avatar, email, _id });

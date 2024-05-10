@@ -30,16 +30,6 @@ const login = ({ email, password }) => {
   }).then(checkResponse);
 };
 
-const getCurrentUser = (jwt) => {
-  return fetch(`${baseUrl}/users/me`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${jwt}`,
-    },
-  }).then(checkResponse);
-};
-
 const checkToken = (jwt) => {
   return fetch(`${baseUrl}/users/me`, {
     method: "GET",
@@ -50,4 +40,4 @@ const checkToken = (jwt) => {
   }).then(checkResponse);
 };
 
-export { signup, login, getCurrentUser, checkToken };
+export { signup, login, checkToken };
