@@ -1,5 +1,5 @@
 import "./ItemCard.css";
-import react, { useContext } from "react";
+import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import like from "../../images/like.svg";
 import liked from "../../images/liked.svg";
@@ -26,7 +26,7 @@ const ItemCard = ({ item, onSelectCard, handleCardLike, isLoggedIn }) => {
         <div className="card__header">
           {item.name}
           <div className={itemLikeButtonClassName} onClick={handleLike}>
-            <img src={itemLikeButtonSrc} />
+            <img src={itemLikeButtonSrc} alt="Like Button" />
           </div>
         </div>
         <img

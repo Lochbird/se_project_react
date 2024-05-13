@@ -9,7 +9,6 @@ const Profile = ({
   weatherTemp,
   onSelectCard,
   clothingItems,
-  // isLoggedIn,
   onLogOut,
   handleEditProfileModal,
 }) => {
@@ -23,7 +22,7 @@ const Profile = ({
     } else {
       return "cold";
     }
-  }, [weatherTemp]);
+  }, [temp]);
 
   const filteredCards = clothingItems.filter((item) => {
     return item.weather === weatherType;

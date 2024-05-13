@@ -22,7 +22,7 @@ function Main({
     } else {
       return "cold";
     }
-  }, [weatherTemp]);
+  }, [temp]);
 
   const filteredCards = clothingItems.filter((item) => {
     return item.weather === weatherType;
@@ -34,7 +34,7 @@ function Main({
         day={true}
         type="sunny"
         weatherTemp={temp}
-        currentTemperatureUnit={currentTemperatureUnit}
+        // currentTemperatureUnit={currentTemperatureUnit}
       />
       <section className="cards__section">
         <div className="cards__header">

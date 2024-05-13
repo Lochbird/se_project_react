@@ -1,5 +1,5 @@
-import { baseUrl } from "../../utils/utils";
-import { checkResponse } from "../../utils/utils";
+import { baseUrl } from "./utils";
+import { checkResponse } from "./utils";
 
 const signup = ({ name, avatar, email, password }) => {
   return fetch(`${baseUrl}/signup`, {

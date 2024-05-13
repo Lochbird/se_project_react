@@ -10,6 +10,7 @@ const ItemModal = ({
 }) => {
   const currentUser = useContext(CurrentUserContext);
   const isOwned = selectedCard.owner === currentUser._id;
+  console.log(selectedCard);
 
   const handleCardDelete = () => {
     console.log("delete card");
@@ -25,9 +26,13 @@ const ItemModal = ({
             type="button"
             onClick={onClose}
           >
-            <img src={closeButton} alt="close" />
+            <img src={closeButton} alt="Close Button" />
           </button>
-          <img src={selectedCard.imageUrl} className="modal__card-image" />
+          <img
+            src={selectedCard.imageUrl}
+            alt={selectedCard}
+            className="modal__card-image"
+          />
           <div className="modal__description">
             <div>
               <div>{selectedCard.name}</div>
