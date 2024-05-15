@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-export const EditProfileModal = ({ handleCloseModal, handleSubmit }) => {
+export const EditProfileModal = ({ handleCloseModal, handleProfileEdit }) => {
   const [values, setValues] = useState({ name: "", avatar: "" });
   const jwt = localStorage.getItem("jwt");
 
@@ -12,7 +12,7 @@ export const EditProfileModal = ({ handleCloseModal, handleSubmit }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    handleSubmit(values, jwt);
+    handleProfileEdit(values, jwt);
     handleCloseModal();
   };
 

@@ -129,6 +129,18 @@ function App() {
     });
   };
 
+  const handleProfileEdit = ({ name, avatar }, jwt) => {
+    setCurrentUser({ ...currentUser, name, avatar });
+    updateUserData({ name, avatar }, jwt)
+      .then((data) => {
+        console.log(data);
+        handleCloseModal();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   const handleCardLike = (id, isLiked) => {
     const jwt = localStorage.getItem("jwt");
     !isLiked
@@ -227,7 +239,6 @@ function App() {
                   onCreateModal={handleCreateModal}
                   clothingItems={clothingItems}
                   onSelectCard={handleSelectedCard}
-                  // isLoggedIn={isLoggedIn}
                   onLogOut={handleLogOut}
                   handleCardLike={handleCardLike}
                   updateUserData={updateUserData}
@@ -278,7 +289,7 @@ function App() {
             {activeModal === "edit" && (
               <EditProfileModal
                 handleCloseModal={handleCloseModal}
-                handleSubmit={updateUserData}
+                handleProfileEdit={handleProfileEdit}
               />
             )}
           </div>

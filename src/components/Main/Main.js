@@ -30,13 +30,7 @@ function Main({
 
   return (
     <main className="main">
-      <CurrentTemperatureUnitContext.Provider value={currentTemperatureUnit} />
-      <WeatherCard
-        day={true}
-        type="sunny"
-        weatherTemp={temp}
-        // currentTemperatureUnit={currentTemperatureUnit}
-      />
+      <WeatherCard day={true} type="sunny" weatherTemp={temp} />
       <section className="cards__section">
         <div className="cards__header">
           Today is {temp}°{currentTemperatureUnit} / You may want to wear:
