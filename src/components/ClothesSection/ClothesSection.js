@@ -19,7 +19,7 @@ const ClothesSection = ({
           </button>
         </div>
       </div>
-      <div className="card__items">
+      <div className="cards__items">
         {filteredCards.map((item) => (
           <ItemCard
             key={item.id || item._id}

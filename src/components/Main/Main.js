@@ -30,6 +30,7 @@ function Main({
 
   return (
     <main className="main">
+      <CurrentTemperatureUnitContext.Provider value={currentTemperatureUnit} />
       <WeatherCard
         day={true}
         type="sunny"

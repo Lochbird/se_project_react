@@ -106,8 +106,7 @@ function App() {
     setCurrentUser({ name: "", avatar: "", email: "", _id: "" });
   };
 
-  const handleCurrentUser = (user) => {
-    console.log(user);
+  const handleCurrentUser = () => {
     const jwt = localStorage.getItem("jwt");
     if (!jwt) {
       return;
@@ -122,12 +121,6 @@ function App() {
       });
     return;
   };
-
-  // const handleRegister = () => {
-  //   console.log("register");
-  //   setIsLoggedIn(true);
-  //   handleCloseModal();
-  // };
 
   const handleRegisterSubmit = ({ name, avatarUrl, email, password }) => {
     auth.signup({ name, avatar: avatarUrl, email, password }).then((data) => {
