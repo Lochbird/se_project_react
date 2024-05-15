@@ -239,6 +239,7 @@ function App() {
                   onCreateModal={handleCreateModal}
                   clothingItems={clothingItems}
                   onSelectCard={handleSelectedCard}
+                  isLoggedIn={isLoggedIn}
                   onLogOut={handleLogOut}
                   handleCardLike={handleCardLike}
                   updateUserData={updateUserData}

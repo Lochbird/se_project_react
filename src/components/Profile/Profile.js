@@ -9,6 +9,7 @@ const Profile = ({
   weatherTemp,
   onSelectCard,
   clothingItems,
+  isLoggedIn,
   onLogOut,
   handleEditProfileModal,
 }) => {
@@ -38,6 +39,7 @@ const Profile = ({
         onCreateModal={onCreateModal}
         filteredCards={filteredCards}
         onSelectCard={onSelectCard}
+        isLoggedIn={isLoggedIn}
       />
     </div>
   );
