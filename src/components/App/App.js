@@ -246,7 +246,7 @@ function App() {
                   onSelectCard={handleSelectedCard}
                   isLoggedIn={isLoggedIn}
                   onLogOut={handleLogOut}
-                  handleCardLike={handleCardLike}
+                  onCardLike={handleCardLike}
                   updateUserData={updateUserData}
                   handleEditProfileModal={() => setActiveModal("edit")}
                 />
