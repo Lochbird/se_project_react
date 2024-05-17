@@ -45,23 +45,25 @@ export const deleteItem = (id) => {
   }).then(checkResponse);
 };
 
-export const addLikeItem = (id, jwt) => {
+export const addLikeItem = (id, owner, jwt) => {
   return fetch(`${baseUrl}/items/${id}/likes`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${jwt}`,
     },
+    body: JSON.stringify({ owner }),
   }).then(checkResponse);
 };
 
-export const removeLikeItem = (id, jwt) => {
+export const removeLikeItem = (id, owner, jwt) => {
   return fetch(`${baseUrl}/items/${id}/likes`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${jwt}`,
     },
+    body: JSON.stringify({ owner }),
   }).then(checkResponse);
 };
 

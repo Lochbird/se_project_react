@@ -141,30 +141,28 @@ function App() {
       });
   };
 
-  const handleCardLike = (id, isLiked) => {
+  const handleCardLike = (id, owner, isLiked) => {
+    console.log(clothingItems);
     const jwt = localStorage.getItem("jwt");
     !isLiked
-      ? addLikeItem(id, jwt)
+      ? addLikeItem(id, owner, jwt)
           .then((updatedCard) => {
-            console.log({ updatedCard, clothingItems });
-            console.log(updatedCard, "isliked should be false");
             setClothingItems((cards) => {
-              return cards.map((card) => (card.id === id ? updatedCard : card));
+              return cards.map((card) =>
+                card._id === id ? updatedCard.item : card
+              );
             });
-            console.log(clothingItems);
           })
           .catch((err) => {
             console.error(err);
           })
-      : removeLikeItem(id, jwt)
+      : removeLikeItem(id, owner, jwt)
           .then((updatedCard) => {
-            console.log({ updatedCard, clothingItems });
-
-            console.log(updatedCard, "isliked should be true");
             setClothingItems((cards) => {
-              return cards.map((card) => (card.id === id ? updatedCard : card));
+              return cards.map((card) =>
+                card._id === id ? updatedCard.item : card
+              );
             });
-            console.log(clothingItems);
           })
           .catch((err) => {
             console.error(err);
@@ -251,7 +249,7 @@ function App() {
                   weatherTemp={temp}
                   onSelectCard={handleSelectedCard}
                   clothingItems={clothingItems}
-                  handleCardLike={handleCardLike}
+                  onCardLike={handleCardLike}
                   onDislikeItem={removeLikeItem}
                   isLoggedIn={isLoggedIn}
                 />

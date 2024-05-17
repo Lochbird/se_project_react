@@ -4,9 +4,11 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import like from "../../images/like.svg";
 import liked from "../../images/liked.svg";
 
-const ItemCard = ({ item, onSelectCard, handleCardLike, isLoggedIn }) => {
+const ItemCard = ({ item, onSelectCard, onCardLike, isLoggedIn }) => {
   const currentUser = useContext(CurrentUserContext);
   const isLiked = item.likes.some((name) => name === currentUser?._id);
+
+  const owner = item.owner;
   const id = item._id || item.id;
 
   const itemLikeButtonClassName = `card__like ${
@@ -15,9 +17,9 @@ const ItemCard = ({ item, onSelectCard, handleCardLike, isLoggedIn }) => {
 
   const itemLikeButtonSrc = isLiked ? liked : like;
 
-  const handleLike = () => {
-    console.log("id: ", id, "isLiked: ", isLiked);
-    handleCardLike(id, isLiked);
+  const handleLike = (e) => {
+    e.preventDefault();
+    onCardLike(id, owner, isLiked);
   };
 
   return (
