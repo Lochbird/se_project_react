@@ -8,6 +8,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import { EditProfileModal } from "../EditProfileModal/EditProfileModal";
+import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 import React, { useEffect, useState } from "react";
 import { getForecastWeather, parseWeatherData } from "../../utils/weatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
@@ -59,6 +60,10 @@ function App() {
 
   const handleCloseModal = () => {
     setActiveModal("");
+  };
+
+  const handleConfirmItemModal = () => {
+    setActiveModal("confirm");
   };
 
   const handleSelectedCard = (card) => {
@@ -170,7 +175,9 @@ function App() {
   };
 
   const handleDeleteItem = (id) => {
-    deleteItem(id)
+    console.log(id);
+    const jwt = localStorage.getItem("jwt");
+    deleteItem(id, jwt)
       .then(() => {
         setClothingItems(clothingItems.filter((item) => item._id !== id));
         handleCloseModal();
@@ -268,6 +275,7 @@ function App() {
                 selectedCard={selectedCard}
                 onClose={handleCloseModal}
                 handleDeleteItem={handleDeleteItem}
+                handleConfirmModal={handleConfirmItemModal}
               />
             )}
             {activeModal === "login" && (
@@ -289,6 +297,13 @@ function App() {
               <EditProfileModal
                 handleCloseModal={handleCloseModal}
                 handleProfileEdit={handleProfileEdit}
+              />
+            )}
+            {activeModal === "confirm" && (
+              <ConfirmDeleteModal
+                onClose={handleCloseModal}
+                onSubmit={handleDeleteItem}
+                selectedCard={selectedCard}
               />
             )}
           </div>

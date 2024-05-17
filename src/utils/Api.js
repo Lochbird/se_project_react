@@ -36,11 +36,12 @@ export const updateUserData = ({ name, avatar }, jwt) => {
   }).then(checkResponse);
 };
 
-export const deleteItem = (id) => {
+export const deleteItem = (id, jwt) => {
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${jwt}`,
     },
   }).then(checkResponse);
 };

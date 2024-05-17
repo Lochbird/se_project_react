@@ -5,7 +5,6 @@ const ModalWithForm = ({
   title,
   children,
   buttonText,
-  // isOpen,
   onSubmit,
   onClose,
   name,
