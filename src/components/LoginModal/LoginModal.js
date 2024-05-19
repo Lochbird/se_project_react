@@ -7,8 +7,9 @@ const LoginModal = ({ handleCloseModal, handleLogin, handleRegister }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin(values);
-    setValues({ email: "", password: "" });
+    handleLogin(values).then(() => {
+      setValues({ email: "", password: "" });
+    });
   };
 
   const handleChange = (e) => {
@@ -24,7 +25,8 @@ const LoginModal = ({ handleCloseModal, handleLogin, handleRegister }) => {
       onSubmit={handleSubmit}
       buttonText={"Log In"}
       name="login"
-      handleRegister={handleRegister}
+      additionalActionText={"Sign Up"}
+      handleAdditionalAction={handleRegister}
     >
       <label>
         Email

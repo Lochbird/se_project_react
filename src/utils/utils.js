@@ -8,3 +8,7 @@ export const checkResponse = (res) => {
   console.log(res, "response is not ok");
   return Promise.reject(`Error: ${res.status}`);
 };
+
+// function request(url, options) {
+//   return fetch(url, options).then(checkResponse)
+// }

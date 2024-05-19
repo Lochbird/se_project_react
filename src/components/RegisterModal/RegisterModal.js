@@ -50,7 +50,8 @@ const RegisterModal = ({ handleCloseModal, handleRegister, login, isOpen }) => {
       onSubmit={handleSubmit}
       buttonText={"Sign Up"}
       name="signup"
-      login={login}
+      additionalActionText={"Log In"}
+      handleAdditionalAction={login}
     >
       <label>
         Email*

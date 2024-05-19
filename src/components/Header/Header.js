@@ -15,6 +15,7 @@ const Header = ({
   onLoginModal,
   onRegisterModal,
   isLoggedIn,
+  location,
 }) => {
   const { name, avatar } = useContext(CurrentUserContext);
 
@@ -26,7 +27,9 @@ const Header = ({
             <img className="header__logo" src={logo} alt="logo" />
           </Link>
         </div>
-        <div className="header__date">{currentDate}, New York</div>
+        <div className="header__date">
+          {currentDate}, {location}
+        </div>
       </div>
       <div className="header__section">
         <ToggleSwitch />

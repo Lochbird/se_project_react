@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-export const EditProfileModal = ({ handleCloseModal, handleProfileEdit }) => {
+export const EditProfileModal = ({
+  handleCloseModal,
+  handleProfileEdit,
+  loading,
+}) => {
   const [values, setValues] = useState({ name: "", avatar: "" });
   const jwt = localStorage.getItem("jwt");
 
@@ -13,7 +17,6 @@ export const EditProfileModal = ({ handleCloseModal, handleProfileEdit }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     handleProfileEdit(values, jwt);
-    handleCloseModal();
   };
 
   return (
@@ -21,7 +24,7 @@ export const EditProfileModal = ({ handleCloseModal, handleProfileEdit }) => {
       title={"Change Profile Data"}
       onClose={handleCloseModal}
       onSubmit={onSubmit}
-      buttonText={"Save Changes"}
+      buttonText={loading ? "Saving..." : "Save Changes"}
       name="edit-profile"
     >
       <label>
@@ -32,6 +35,7 @@ export const EditProfileModal = ({ handleCloseModal, handleProfileEdit }) => {
           name="name"
           minLength="1"
           maxLength="30"
+          value={values.name}
           onChange={handleChange}
           required
         />
@@ -43,6 +47,7 @@ export const EditProfileModal = ({ handleCloseModal, handleProfileEdit }) => {
           type="url"
           name="avatar"
           minLength="1"
+          value={values.avatar}
           onChange={handleChange}
           required
         />

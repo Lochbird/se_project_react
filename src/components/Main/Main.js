@@ -15,14 +15,24 @@ function Main({
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 0;
 
   const weatherType = useMemo(() => {
-    if (temp >= 86) {
-      return "hot";
-    } else if (temp >= 66 && temp <= 85) {
-      return "warm";
+    if (currentTemperatureUnit === "F") {
+      if (temp >= 86) {
+        return "hot";
+      } else if (temp >= 66 && temp <= 85) {
+        return "warm";
+      } else {
+        return "cold";
+      }
     } else {
-      return "cold";
+      if (temp >= 30) {
+        return "hot";
+      } else if (temp >= 19 && temp <= 29) {
+        return "warm";
+      } else {
+        return "cold";
+      }
     }
-  }, [temp]);
+  }, [temp, currentTemperatureUnit]);
 
   const filteredCards = clothingItems.filter((item) => {
     return item.weather === weatherType;

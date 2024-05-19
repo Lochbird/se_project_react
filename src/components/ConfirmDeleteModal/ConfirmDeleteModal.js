@@ -6,8 +6,10 @@ export default function ConfirmDeleteModal({
   onClose,
   onSubmit,
   selectedCard,
+  loading,
 }) {
-  const handleDeleteItem = () => {
+  const handleDeleteItem = (e) => {
+    e.preventDefault();
     onSubmit(selectedCard._id);
   };
 
@@ -27,7 +29,7 @@ export default function ConfirmDeleteModal({
             type="button"
             onClick={handleDeleteItem}
           >
-            Yes, delete item
+            {loading ? "Deleting..." : "Yes, delete item"}
           </button>
           <button
             className="modal__button modal__button-cancel"

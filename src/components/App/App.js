@@ -10,7 +10,11 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import { EditProfileModal } from "../EditProfileModal/EditProfileModal";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 import React, { useEffect, useState } from "react";
-import { getForecastWeather, parseWeatherData } from "../../utils/weatherApi";
+import {
+  getForecastInfo,
+  parseWeatherData,
+  parseLocation,
+} from "../../utils/weatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { Switch, Route } from "react-router-dom/cjs/react-router-dom.min";
@@ -38,6 +42,8 @@ function App() {
   const [temp, setTemp] = useState(0);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
+  const [location, setLocation] = useState("");
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     name: "",
@@ -45,6 +51,8 @@ function App() {
     email: "",
     _id: "",
   });
+
+  const [loading, setIsLoading] = useState(false);
 
   const handleLoginModal = () => {
     setActiveModal("login");
@@ -59,6 +67,7 @@ function App() {
   };
 
   const handleCloseModal = () => {
+    console.log("close modal");
     setActiveModal("");
   };
 
@@ -72,27 +81,30 @@ function App() {
   };
 
   const onAddItem = (values) => {
-    console.log(values);
     const jwt = localStorage.getItem("jwt");
+    setIsLoading(true);
     addItem({ values }, jwt)
       .then((res) => {
-        console.log(res);
         setClothingItems([res, ...clothingItems]);
         handleCloseModal();
       })
-      .catch((err) => {
-        console.error(err);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
   const handleLogin = () => {
-    console.log("login");
-    setIsLoggedIn(true);
     handleCurrentUser();
-    handleCloseModal();
   };
 
+  // const handleSubmit = (request) => {
+  //   setLoading(true);
+  //   request().then(handleCloseModal).catch(console.error);
+  // };
+
   const handleLoginSubmit = ({ email, password }) => {
+    setIsLoading(true);
     auth
       .login({ email, password })
       .then((res) => {
@@ -100,8 +112,9 @@ function App() {
         handleLogin();
         handleCloseModal();
       })
-      .catch((err) => {
-        console.error(err);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -120,34 +133,39 @@ function App() {
       .then(({ name, avatar, email, _id }) => {
         setIsLoggedIn(true);
         setCurrentUser({ name, avatar, email, _id });
+        handleCloseModal();
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      .catch(console.error);
     return;
   };
 
   const handleRegisterSubmit = ({ name, avatarUrl, email, password }) => {
-    auth.signup({ name, avatar: avatarUrl, email, password }).then((data) => {
-      console.log(data);
-      handleCloseModal();
-    });
+    setIsLoading(true);
+    auth
+      .signup({ name, avatar: avatarUrl, email, password })
+      .then(() => {
+        handleCloseModal();
+      })
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const handleProfileEdit = ({ name, avatar }, jwt) => {
+    setIsLoading(true);
     setCurrentUser({ ...currentUser, name, avatar });
     updateUserData({ name, avatar }, jwt)
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         handleCloseModal();
       })
-      .catch((err) => {
-        console.error(err);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
   const handleCardLike = (id, owner, isLiked) => {
-    console.log(clothingItems);
     const jwt = localStorage.getItem("jwt");
     !isLiked
       ? addLikeItem(id, owner, jwt)
@@ -158,9 +176,7 @@ function App() {
               );
             });
           })
-          .catch((err) => {
-            console.error(err);
-          })
+          .catch(console.error)
       : removeLikeItem(id, owner, jwt)
           .then((updatedCard) => {
             setClothingItems((cards) => {
@@ -169,40 +185,50 @@ function App() {
               );
             });
           })
-          .catch((err) => {
-            console.error(err);
-          });
+          .catch(console.error);
   };
 
   const handleDeleteItem = (id) => {
-    console.log(id);
     const jwt = localStorage.getItem("jwt");
+    setIsLoading(true);
     deleteItem(id, jwt)
       .then(() => {
         setClothingItems(clothingItems.filter((item) => item._id !== id));
-        handleCloseModal();
       })
-      .catch((err) => {
-        console.error(err);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+        handleCloseModal();
       });
   };
 
+  // function handleSubmit(request) {
+  //   // start loading
+  //   setIsLoading(true);
+  //   request()
+  //     // we need to close only in `then`
+  //     .then(handleCloseModal)
+  //     // we need to catch possible errors
+  //     // console.error is used to handle errors if you don’t have any other ways for that
+  //     .catch(console.error)
+  //     // and in finally we need to stop loading
+  //     .finally(() => setIsLoading(false));
+  // }
+
   useEffect(() => {
-    getForecastWeather()
+    getForecastInfo()
       .then((data) => {
         const temperature = parseWeatherData(data);
+        const location = parseLocation(data);
         setTemp(temperature);
+        setLocation(location);
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      .catch(console.error);
     getItems()
       .then((res) => {
         setClothingItems(res);
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      .catch(console.error);
   }, []);
 
   useEffect(() => {
@@ -216,11 +242,31 @@ function App() {
         setIsLoggedIn(true);
         handleCurrentUser(user);
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      .catch(console.error);
   }, []);
 
+  useEffect(() => {
+    if (!activeModal) return;
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        handleCloseModal();
+      }
+    };
+
+    const handleClickClose = (e) => {
+      if (e.target.classList.contains("modal")) {
+        handleCloseModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+    document.addEventListener("click", handleClickClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+      document.removeEventListener("click", handleClickClose);
+    };
+  }, [activeModal]);
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
@@ -237,6 +283,7 @@ function App() {
               onLoginModal={handleLoginModal}
               onRegisterModal={handleRegisterModal}
               isLoggedIn={isLoggedIn}
+              location={location}
             />
             <Switch>
               <ProtectedRoute path="/profile" isLoggedIn={isLoggedIn}>
@@ -268,6 +315,7 @@ function App() {
                 handleCloseModal={handleCloseModal}
                 onAddItem={onAddItem}
                 handleAddItemsSubmit={onAddItem}
+                loading={loading}
               />
             )}
             {activeModal === "preview" && (
@@ -297,6 +345,7 @@ function App() {
               <EditProfileModal
                 handleCloseModal={handleCloseModal}
                 handleProfileEdit={handleProfileEdit}
+                loading={loading}
               />
             )}
             {activeModal === "confirm" && (
@@ -304,6 +353,7 @@ function App() {
                 onClose={handleCloseModal}
                 onSubmit={handleDeleteItem}
                 selectedCard={selectedCard}
+                loading={loading}
               />
             )}
           </div>

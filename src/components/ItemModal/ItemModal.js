@@ -30,17 +30,17 @@ const ItemModal = ({
           </button>
           <img
             src={selectedCard.imageUrl}
-            alt={selectedCard}
+            alt={selectedCard.name}
             className="modal__card-image"
           />
           <div className="modal__description">
-            <div>
+            <div className="modal__card-info">
               <div>{selectedCard.name}</div>
               <div>Weather Type: {selectedCard.weather}</div>
             </div>
             {isOwned && (
               <button
-                className="modal__description modal__button-delete"
+                className="modal__button-delete"
                 type="button"
                 onClick={handleCardDelete}
               >

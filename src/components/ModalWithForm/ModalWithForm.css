@@ -71,7 +71,7 @@
   transition: background-color 0.3s ease-in-out;
 }
 
-.modal__button-signup {
+.modal__additional-action {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,31 +95,7 @@
   transition: color 0.3s ease-in-out;
 }
 
-.modal__button-login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: max-content;
-  height: 36px;
-  margin: 32px 0 0 0;
-  padding: 16px 0 16px 12px;
-
-  border: none;
-
-  font-family: "Cabinet Grotesk";
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
-
-  color: rgba(0, 0, 0, 0.5);
-  background-color: transparent;
-
-  cursor: pointer;
-  transition: color 0.3s ease-in-out;
-}
-
-.modal__button-signup:hover {
+.modal__additional-action {
   color: #000;
 }
 

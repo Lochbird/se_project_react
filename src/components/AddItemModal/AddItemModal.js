@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const AddItemModal = ({ handleCloseModal, handleAddItemsSubmit, isOpen }) => {
+const AddItemModal = ({
+  handleCloseModal,
+  handleAddItemsSubmit,
+  isOpen,
+  loading,
+}) => {
   const [name, setName] = useState("");
   const [weather, setWeather] = useState("");
   const handleNameChange = (e) => {
@@ -30,7 +35,7 @@ const AddItemModal = ({ handleCloseModal, handleAddItemsSubmit, isOpen }) => {
     <ModalWithForm
       onClose={handleCloseModal}
       title="New garment"
-      buttonText="Add garment"
+      buttonText={loading ? "Saving..." : "Save"}
       isOpen={isOpen}
       onSubmit={handleSubmit}
     >
@@ -62,37 +67,43 @@ const AddItemModal = ({ handleCloseModal, handleAddItemsSubmit, isOpen }) => {
       <p>Select the weather type:</p>
       <div>
         <div>
-          <input
-            className="modal__radio"
-            type="radio"
-            name="weather"
-            value="hot"
-            id="hot"
-            onClick={() => setWeather("hot")}
-          />
-          <label>Hot</label>
+          <label>
+            <input
+              className="modal__radio"
+              type="radio"
+              name="weather"
+              value="hot"
+              id="hot"
+              onClick={() => setWeather("hot")}
+            />
+            Hot
+          </label>
         </div>
         <div>
-          <input
-            className="modal__radio"
-            type="radio"
-            name="weather"
-            value="warm"
-            id="warm"
-            onClick={() => setWeather("warm")}
-          />
-          <label>Warm</label>
+          <label>
+            <input
+              className="modal__radio"
+              type="radio"
+              name="weather"
+              value="warm"
+              id="warm"
+              onClick={() => setWeather("warm")}
+            />
+            Warm
+          </label>
         </div>
         <div>
-          <input
-            className="modal__radio"
-            type="radio"
-            name="weather"
-            value="cold"
-            id="cold"
-            onClick={() => setWeather("cold")}
-          />
-          <label>Cold</label>
+          <label>
+            <input
+              className="modal__radio"
+              type="radio"
+              name="weather"
+              value="cold"
+              id="cold"
+              onClick={() => setWeather("cold")}
+            />
+            Cold
+          </label>
         </div>
       </div>
     </ModalWithForm>

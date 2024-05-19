@@ -3,10 +3,13 @@
   flex-direction: row;
   justify-content: space-between;
 
-  font-family: "Cabinet Grotesk";
   font-size: 20px;
-  line-height: 24px;
   font-weight: 700;
+}
+
+.modal__card-info {
+  display: flex;
+  flex-direction: column;
 }
 
 .modal__card-image {
@@ -24,6 +27,11 @@
 .modal__button-delete {
   color: #ff4d00;
   background-color: transparent;
+
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
 
   border: none;
   outline: none;
