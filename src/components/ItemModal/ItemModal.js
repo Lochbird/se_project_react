@@ -3,15 +3,9 @@ import closeButton from "../../images/close-button.svg";
 import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-const ItemModal = ({
-  selectedCard,
-  onClose,
-  handleDeleteItem,
-  handleConfirmModal,
-}) => {
+const ItemModal = ({ selectedCard, onClose, handleConfirmModal }) => {
   const currentUser = useContext(CurrentUserContext);
   const isOwned = selectedCard.owner === currentUser._id;
-  console.log(selectedCard);
 
   const handleCardDelete = () => {
     handleConfirmModal();

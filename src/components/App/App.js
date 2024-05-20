@@ -84,7 +84,7 @@ function App() {
     setIsLoading(true);
     addItem({ values }, jwt)
       .then((res) => {
-        setClothingItems([...clothingItems, res]);
+        setClothingItems([res, ...clothingItems]);
         handleCloseModal();
       })
       .catch(console.error)
@@ -94,8 +94,8 @@ function App() {
   };
 
   // const handleSubmit = (request) => {
-  //   setLoading(true);
-  //   request().then(handleCloseModal).catch(console.error);
+  //   setIsLoading(true);
+  //   request().then(handleCloseModal).catch(console.error).finally(() => {setIsLoading(false)});
   // };
 
   const handleLoginSubmit = ({ email, password }) => {
@@ -149,9 +149,9 @@ function App() {
 
   const handleProfileEdit = ({ name, avatar }, jwt) => {
     setIsLoading(true);
-    setCurrentUser({ ...currentUser, name, avatar });
     updateUserData({ name, avatar }, jwt)
       .then(() => {
+        setCurrentUser({ ...currentUser, name, avatar });
         handleCloseModal();
       })
       .catch(console.error)
@@ -189,11 +189,11 @@ function App() {
     deleteItem(id, jwt)
       .then(() => {
         setClothingItems(clothingItems.filter((item) => item._id !== id));
+        handleCloseModal();
       })
       .catch(console.error)
       .finally(() => {
         setIsLoading(false);
-        handleCloseModal();
       });
   };
 
@@ -221,7 +221,7 @@ function App() {
       .catch(console.error);
     getItems()
       .then((res) => {
-        setClothingItems(res);
+        setClothingItems(res.reverse());
       })
       .catch(console.error);
   }, []);
@@ -341,6 +341,7 @@ function App() {
               <EditProfileModal
                 handleCloseModal={handleCloseModal}
                 handleProfileEdit={handleProfileEdit}
+                currentUser={currentUser}
                 loading={loading}
                 isOpen={activeModal === "edit"}
               />

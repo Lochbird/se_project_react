@@ -18,7 +18,6 @@ const LoginModal = ({
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
-    console.log(values);
   };
 
   useEffect(() => {
@@ -43,6 +42,7 @@ const LoginModal = ({
           name="email"
           minLength="1"
           maxLength="30"
+          value={values.email}
           onChange={handleChange}
           required
         />
@@ -55,6 +55,7 @@ const LoginModal = ({
           name="password"
           minLength="1"
           maxLength="30"
+          value={values.password}
           onChange={handleChange}
           required
         />
