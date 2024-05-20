@@ -1,12 +1,10 @@
-import React, { useMemo, useContext } from "react";
+import React from "react";
 import "./Profile.css";
 import SideBar from "../SideBar/SideBar";
 import ClothesSection from "../ClothesSection/ClothesSection";
-import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
 const Profile = ({
   onCreateModal,
-  weatherTemp,
   onSelectCard,
   clothingItems,
   onCardLike,
@@ -14,22 +12,6 @@ const Profile = ({
   onLogOut,
   handleEditProfileModal,
 }) => {
-  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
-  const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 0;
-  const weatherType = useMemo(() => {
-    if (temp >= 86) {
-      return "hot";
-    } else if (temp >= 66 && temp <= 85) {
-      return "warm";
-    } else {
-      return "cold";
-    }
-  }, [temp]);
-
-  const filteredCards = clothingItems.filter((item) => {
-    return item.weather === weatherType;
-  });
-
   return (
     <div className="profile">
       <SideBar
@@ -38,7 +20,7 @@ const Profile = ({
       />
       <ClothesSection
         onCreateModal={onCreateModal}
-        filteredCards={filteredCards}
+        clothingItems={clothingItems}
         onSelectCard={onSelectCard}
         isLoggedIn={isLoggedIn}
         onCardLike={onCardLike}

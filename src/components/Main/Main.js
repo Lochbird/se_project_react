@@ -38,6 +38,8 @@ function Main({
     return item.weather === weatherType;
   });
 
+  console.log(clothingItems);
+
   return (
     <main className="main">
       <WeatherCard day={true} type="sunny" weatherTemp={temp} />

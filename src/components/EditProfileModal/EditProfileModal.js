@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { getCurrentUser } from "../../utils/Api";
 
 export const EditProfileModal = ({
   handleCloseModal,
   handleProfileEdit,
   loading,
+  isOpen,
 }) => {
   const [values, setValues] = useState({ name: "", avatar: "" });
   const jwt = localStorage.getItem("jwt");
@@ -18,6 +20,19 @@ export const EditProfileModal = ({
     e.preventDefault();
     handleProfileEdit(values, jwt);
   };
+
+  useEffect(() => {
+    getCurrentUser(jwt)
+      .then((res) => {
+        setValues({
+          name: res.name,
+          avatar: res.avatar,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [isOpen, jwt]);
 
   return (
     <ModalWithForm

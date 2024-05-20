@@ -31,7 +31,6 @@ export const updateUserData = ({ name, avatar }, jwt) => {
     body: JSON.stringify({
       name,
       avatar,
-      // email,
     }),
   }).then(checkResponse);
 };

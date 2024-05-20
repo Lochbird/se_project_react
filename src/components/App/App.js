@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -9,7 +10,6 @@ import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import { EditProfileModal } from "../EditProfileModal/EditProfileModal";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
-import React, { useEffect, useState } from "react";
 import {
   getForecastInfo,
   parseWeatherData,
@@ -67,7 +67,6 @@ function App() {
   };
 
   const handleCloseModal = () => {
-    console.log("close modal");
     setActiveModal("");
   };
 
@@ -85,17 +84,13 @@ function App() {
     setIsLoading(true);
     addItem({ values }, jwt)
       .then((res) => {
-        setClothingItems([res, ...clothingItems]);
+        setClothingItems([...clothingItems, res]);
         handleCloseModal();
       })
       .catch(console.error)
       .finally(() => {
         setIsLoading(false);
       });
-  };
-
-  const handleLogin = () => {
-    handleCurrentUser();
   };
 
   // const handleSubmit = (request) => {
@@ -109,7 +104,7 @@ function App() {
       .login({ email, password })
       .then((res) => {
         localStorage.setItem("jwt", res.token);
-        handleLogin();
+        handleCurrentUser();
         handleCloseModal();
       })
       .catch(console.error)
@@ -240,10 +235,10 @@ function App() {
       .checkToken(jwt)
       .then((user) => {
         setIsLoggedIn(true);
-        handleCurrentUser(user);
+        setCurrentUser(user);
       })
       .catch(console.error);
-  }, []);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     if (!activeModal) return;
@@ -331,6 +326,7 @@ function App() {
                 handleCloseModal={handleCloseModal}
                 handleLogin={handleLoginSubmit}
                 handleRegister={handleRegisterModal}
+                isOpen={activeModal === "login"}
               />
             )}
             {activeModal === "register" && (
@@ -346,6 +342,7 @@ function App() {
                 handleCloseModal={handleCloseModal}
                 handleProfileEdit={handleProfileEdit}
                 loading={loading}
+                isOpen={activeModal === "edit"}
               />
             )}
             {activeModal === "confirm" && (
