@@ -341,7 +341,6 @@ function App() {
               <EditProfileModal
                 handleCloseModal={handleCloseModal}
                 handleProfileEdit={handleProfileEdit}
-                currentUser={currentUser}
                 loading={loading}
                 isOpen={activeModal === "edit"}
               />

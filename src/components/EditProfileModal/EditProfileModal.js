@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 export const EditProfileModal = ({
   handleCloseModal,
   handleProfileEdit,
   loading,
   isOpen,
-  currentUser,
 }) => {
   const [values, setValues] = useState({ name: "", avatar: "" });
   const jwt = localStorage.getItem("jwt");
+
+  const currentUser = React.useContext(CurrentUserContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
